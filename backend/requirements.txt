@@ -1,0 +1,13 @@
+fastapi>=0.115
+uvicorn[standard]>=0.30
+pandas>=2.2
+openpyxl>=3.1
+requests>=2.32
+
+# ใช้เฉพาะ scripts/propose.py ซึ่งรันมือตอนเติมตารางอ้างอิง ไม่ใช่ของที่ runtime ต้องมี
+# ระบบจับคู่ทำงานได้ครบโดยไม่ต้องติดตั้งตัวนี้
+anthropic>=0.120
+
+# ใช้เฉพาะ scripts/build_refdata.py ตอนแกะ PDF "Recommendation" ของ INVX Research
+# (Thai Stock Coverage List ที่สดกว่า STEP4 Excel) — ดึงไม่ได้ก็ใช้ Excel ต่อได้ปกติ
+pypdf>=6.0

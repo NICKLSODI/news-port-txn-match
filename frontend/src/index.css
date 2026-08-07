@@ -1,0 +1,245 @@
+@import 'tailwindcss';
+/* ฟอนต์โหลดจาก /fonts/plex.css ใน index.html — เป็นไฟล์ static ไม่ผ่าน bundler */
+
+/* ===========================================================================
+   Tokens
+
+   หน้าจอนี้เป็นคอนโซลที่ RM กวาดสายตาทั้งวัน ไม่ใช่หน้าการตลาด
+   ทุกค่าจึงเลือกจากงานที่มันต้องทำ: อ่านชื่อคน อ่านเหตุผล เทียบตัวเลข
+
+   ฟอนต์  IBM Plex Sans Thai — ไทย ละติน ตัวเลข อยู่ตระกูลเดียว
+          ไม่ต้องผสมสองฟอนต์ และมี tabular figures ใช้เรียงคอลัมน์มูลค่าได้ตรง
+   สี     ฐานเป็นกลางล้วน + accent เดียว (น้ำเงิน)
+          สีระดับ L1-L6 ไม่ใช่การตกแต่ง — มันเข้ารหัสข้อมูล จึงเก็บไว้
+          สีสถานะใช้เฉพาะตอนมีสถานะจริงเท่านั้น
+   ระยะ   4 / 8 / 16 / 32 / 56 ใช้ไม่เท่ากันโดยตั้งใจ
+          ชิดกันคือของกลุ่มเดียวกัน ห่างคือคนละเรื่อง
+   มุม    8px ชั้นนอก 4px ชั้นใน ไม่มีมุมกลมซ้อนมุมกลมขนาดเท่ากัน
+=========================================================================== */
+
+:root {
+  color-scheme: light;
+
+  --paper: #fbfbfa;
+  --surface: #ffffff;
+  --raised: #f4f4f2;
+  --ink: #16150f;
+  --ink-2: #56544c;
+  --ink-3: #8b8880;
+  --rule: #e4e3dc;
+  --rule-strong: #cbc9c0;
+  --wash: #f0efeb;
+
+  --accent: #1f6fd0;
+  --accent-ink: #ffffff;
+  --accent-wash: #eaf1fb;
+
+  --s1: #2a78d6;
+  --s2: #eb6834;
+  --s3: #1baf7a;
+  --s4: #eda100;
+  --s5: #e87ba4;
+  --s6: #008300;
+
+  --good: #0ca30c;
+  --warning: #fab219;
+  --serious: #ec835a;
+  --critical: #d03b3b;
+  --pos: #006300;
+
+  --r-out: 8px;
+  --r-in: 4px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme='light'])) {
+    color-scheme: dark;
+    --paper: #121211;
+    --surface: #1a1a19;
+    --raised: #232322;
+    --ink: #f5f4ef;
+    --ink-2: #b3b1a7;
+    --ink-3: #85837b;
+    --rule: #2b2b29;
+    --rule-strong: #3d3d3a;
+    --wash: #222220;
+    --accent: #4c94ea;
+    --accent-ink: #0b0b0a;
+    --accent-wash: #16283d;
+    --s1: #3987e5;
+    --s2: #d95926;
+    --s3: #199e70;
+    --s4: #c98500;
+    --s5: #d55181;
+    --s6: #1aa11a;
+    --pos: #0ca30c;
+  }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --paper: #121211;
+  --surface: #1a1a19;
+  --raised: #232322;
+  --ink: #f5f4ef;
+  --ink-2: #b3b1a7;
+  --ink-3: #85837b;
+  --rule: #2b2b29;
+  --rule-strong: #3d3d3a;
+  --wash: #222220;
+  --accent: #4c94ea;
+  --accent-ink: #0b0b0a;
+  --accent-wash: #16283d;
+  --s1: #3987e5;
+  --s2: #d95926;
+  --s3: #199e70;
+  --s4: #c98500;
+  --s5: #d55181;
+  --s6: #1aa11a;
+  --pos: #0ca30c;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-raised: var(--raised);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-wash: var(--wash);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-wash: var(--accent-wash);
+  --color-good: var(--good);
+  --color-warning: var(--warning);
+  --color-serious: var(--serious);
+  --color-critical: var(--critical);
+  --color-pos: var(--pos);
+
+  --radius-out: var(--r-out);
+  --radius-in: var(--r-in);
+
+  --font-sans: 'IBM Plex Sans Thai', system-ui, sans-serif;
+
+  /* สเกลที่ห่างกันจริง ≥1.3× — ไม่ใช่ทุกอย่างกองอยู่ที่ 13-15px */
+  --text-display: 2.125rem;
+  --text-display--line-height: 1.05;
+  --text-display--letter-spacing: -0.022em;
+  --text-h1: 1.375rem;
+  --text-h1--line-height: 1.2;
+  --text-h1--letter-spacing: -0.014em;
+  --text-h2: 1rem;
+  --text-h2--line-height: 1.35;
+  --text-h2--letter-spacing: -0.006em;
+  --text-body: 0.875rem;
+  --text-body--line-height: 1.55;
+  --text-small: 0.78125rem;
+  --text-small--line-height: 1.45;
+  --text-micro: 0.71875rem;
+  --text-micro--line-height: 1.35;
+}
+
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ตัวเลขที่ต้องเทียบกันในคอลัมน์ ต้องกว้างเท่ากันทุกตัว */
+.tnum {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+}
+
+::selection {
+  background: var(--accent-wash);
+}
+
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--rule-strong);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+input[type='date'] {
+  color-scheme: inherit;
+}
+
+/* ปุ่มและลิงก์เปลี่ยนเฉพาะพื้นผิว ไม่ยืด ไม่เด้ง */
+.tap {
+  transition:
+    background-color 140ms ease,
+    border-color 140ms ease,
+    color 140ms ease;
+}
+
+@keyframes mp-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.mp-in {
+  animation: mp-fade 140ms ease-out both;
+}
+
+/* วงหมุนตอนระบบทำงานยาว — งานนำเข้ากินเวลาเป็นนาที ต้องมีอะไรขยับให้รู้ว่ายังไม่ตาย */
+@keyframes mp-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.mp-spin {
+  animation: mp-spin 900ms linear infinite;
+}
+
+/* แถบความคืบหน้าแบบไม่รู้เปอร์เซ็นต์ — ใช้ตอนงานอยู่ฝั่งเซิร์ฟเวอร์ วัดไม่ได้ */
+@keyframes mp-sweep {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(300%);
+  }
+}
+.mp-sweep {
+  animation: mp-sweep 1400ms ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mp-in,
+  .tap {
+    animation: none;
+    transition: none;
+  }
+  /* ยังต้องขยับเพื่อบอกว่ากำลังทำงาน แต่ช้าลงและไม่กระตุก */
+  .mp-spin {
+    animation-duration: 2s;
+  }
+  .mp-sweep {
+    animation: none;
+    transform: none;
+    width: 100%;
+    opacity: 0.5;
+  }
+}

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>News–Customer Matching · INVX</title>
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#1f6fd0" />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/plex-thai-thai-400.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/plex-thai-latin-400.woff2" crossorigin />
+    <link rel="stylesheet" href="/fonts/plex.css" />
+    <script>
+      // ตั้งธีมก่อน paint กันหน้าจอกระพริบ
+      try {
+        var t = localStorage.getItem('mp-theme')
+        if (t) document.documentElement.setAttribute('data-theme', t)
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
