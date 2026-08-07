@@ -82,7 +82,15 @@ def main() -> int:
     t0 = time.time()
     try:
         if a.cmd in ("ingest", "all"):
-            show("ingest customers", ingest.ingest(con))
+            try:
+                show("ingest customers", ingest.ingest(con))
+            except ingest.CustomerFilesMissing as e:
+                # ไม่มีไฟล์ลูกค้าไม่ใช่ความผิดพลาด — เครื่องที่เพิ่ง clone มายังไม่มีแน่นอน
+                # `all` ต้องทำขั้นที่เหลือ (ดึงข่าว) ต่อได้ ส่วน `ingest` เดี่ยว ๆ จบด้วย exit 1
+                # เพราะผู้ใช้สั่งงานนี้ตรง ๆ ต้องรู้ว่าไม่ได้ทำ
+                print(f"\n! ข้ามการนำเข้าไฟล์ลูกค้า\n{e}\n")
+                if a.cmd == "ingest":
+                    return 1
         if a.cmd in ("news", "all", "daily") and a.subcategory:
             show(f"ingest news [{a.subcategory}]",
                  news.ingest_subcategory(con, a.subcategory, pages=a.pages, limit=a.limit))

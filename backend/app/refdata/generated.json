@@ -753,6 +753,11 @@
    "source": "alias_table",
    "confidence": "inferred"
   },
+  "BRKB80": {
+   "parent": "BRK.B:xnys",
+   "source": "alias_table",
+   "confidence": "inferred"
+  },
   "LLY80": {
    "parent": "LLY:xnys",
    "source": "spec_b1",
@@ -893,6 +898,11 @@
    "source": "alias_table",
    "confidence": "inferred"
   },
+  "UNIQLO80": {
+   "parent": "9983:XTKS",
+   "source": "alias_table",
+   "confidence": "inferred"
+  },
   "JD80": {
    "parent": "JD:xnas",
    "source": "spec_b1",
@@ -953,6 +963,11 @@
    "source": "alias_table",
    "confidence": "inferred"
   },
+  "LOREAL80": {
+   "parent": "OR:xpar",
+   "source": "alias_table",
+   "confidence": "inferred"
+  },
   "CHMOBILE19": {
    "parent": "00941:xhkg",
    "source": "alias_table",
@@ -966,6 +981,11 @@
   "GEV23": {
    "parent": "GEV:xnys",
    "source": "spec_b1",
+   "confidence": "inferred"
+  },
+  "KEYENCE23": {
+   "parent": "6861:XTKS",
+   "source": "alias_table",
    "confidence": "inferred"
   },
   "KUAISH80": {
@@ -1018,6 +1038,11 @@
    "source": "spec_b1",
    "confidence": "inferred"
   },
+  "NINTENDO19": {
+   "parent": "7974:XTKS",
+   "source": "alias_table",
+   "confidence": "inferred"
+  },
   "BIDU01": {
    "parent": "BIDU:xnas",
    "source": "spec_b1",
@@ -1026,6 +1051,11 @@
   "MWG19": {
    "parent": "MWG:XSTC",
    "source": "spec_b1",
+   "confidence": "inferred"
+  },
+  "SANRIO23": {
+   "parent": "8136:XTKS",
+   "source": "alias_table",
    "confidence": "inferred"
   },
   "MICRON23": {
@@ -1098,9 +1128,19 @@
    "source": "alias_table",
    "confidence": "inferred"
   },
+  "KIOXIA23": {
+   "parent": "285A:XTKS",
+   "source": "alias_table",
+   "confidence": "inferred"
+  },
   "IBM06": {
    "parent": "IBM:xnys",
    "source": "spec_b1",
+   "confidence": "inferred"
+  },
+  "SANOFI80": {
+   "parent": "SAN:xpar",
+   "source": "alias_table",
    "confidence": "inferred"
   },
   "MSFT23": {
@@ -1128,6 +1168,11 @@
    "source": "alias_table",
    "confidence": "inferred"
   },
+  "NINTENDO23": {
+   "parent": "7974:XTKS",
+   "source": "alias_table",
+   "confidence": "inferred"
+  },
   "INTEL01": {
    "parent": "INTC:xnas",
    "source": "alias_table",
@@ -1145,6 +1190,11 @@
   },
   "ESTEE80": {
    "parent": "EL:xnys",
+   "source": "alias_table",
+   "confidence": "inferred"
+  },
+  "CMBANK23": {
+   "parent": "03968:xhkg",
    "source": "alias_table",
    "confidence": "inferred"
   },
@@ -1171,6 +1221,11 @@
   "GOOGL01": {
    "parent": "GOOGL:xnas",
    "source": "spec_b1",
+   "confidence": "inferred"
+  },
+  "WUXIAT80": {
+   "parent": "02268:xhkg",
+   "source": "alias_table",
    "confidence": "inferred"
   },
   "NBIS23": {
@@ -1634,61 +1689,6 @@
    "code": "JLMAG80",
    "name": "JLMAG",
    "reason": "ไม่มีในตารางชื่อพ้อง (R4.27)"
-  },
-  {
-   "code": "BRKB80",
-   "parent": "BRK.B:xnys",
-   "reason": "รหัสหุ้นแม่ที่ alias ชี้ไป ไม่พบในพอร์ตลูกค้า"
-  },
-  {
-   "code": "UNIQLO80",
-   "parent": "9983:XTKS",
-   "reason": "รหัสหุ้นแม่ที่ alias ชี้ไป ไม่พบในพอร์ตลูกค้า"
-  },
-  {
-   "code": "LOREAL80",
-   "parent": "OR:xpar",
-   "reason": "รหัสหุ้นแม่ที่ alias ชี้ไป ไม่พบในพอร์ตลูกค้า"
-  },
-  {
-   "code": "KEYENCE23",
-   "parent": "6861:XTKS",
-   "reason": "รหัสหุ้นแม่ที่ alias ชี้ไป ไม่พบในพอร์ตลูกค้า"
-  },
-  {
-   "code": "NINTENDO19",
-   "parent": "7974:XTKS",
-   "reason": "รหัสหุ้นแม่ที่ alias ชี้ไป ไม่พบในพอร์ตลูกค้า"
-  },
-  {
-   "code": "SANRIO23",
-   "parent": "8136:XTKS",
-   "reason": "รหัสหุ้นแม่ที่ alias ชี้ไป ไม่พบในพอร์ตลูกค้า"
-  },
-  {
-   "code": "KIOXIA23",
-   "parent": "285A:XTKS",
-   "reason": "รหัสหุ้นแม่ที่ alias ชี้ไป ไม่พบในพอร์ตลูกค้า"
-  },
-  {
-   "code": "SANOFI80",
-   "parent": "SAN:xpar",
-   "reason": "รหัสหุ้นแม่ที่ alias ชี้ไป ไม่พบในพอร์ตลูกค้า"
-  },
-  {
-   "code": "NINTENDO23",
-   "parent": "7974:XTKS",
-   "reason": "รหัสหุ้นแม่ที่ alias ชี้ไป ไม่พบในพอร์ตลูกค้า"
-  },
-  {
-   "code": "CMBANK23",
-   "parent": "03968:xhkg",
-   "reason": "รหัสหุ้นแม่ที่ alias ชี้ไป ไม่พบในพอร์ตลูกค้า"
-  },
-  {
-   "code": "WUXIAT80",
-   "parent": "02268:xhkg",
-   "reason": "รหัสหุ้นแม่ที่ alias ชี้ไป ไม่พบในพอร์ตลูกค้า"
   }
  ],
  "dr_names": {

@@ -24,17 +24,37 @@ try {
         python -m scripts.build_refdata
         if (-not $?) { throw 'build_refdata failed' }
 
-        Step 'นำเข้าไฟล์ลูกค้า + คำนวณ feature และ persona (STEP1/STEP5)'
-        python -m scripts.pipeline ingest
-        if (-not $?) { throw 'ingest failed' }
+        # ไฟล์ลูกค้าไม่ได้อยู่ใน git (เป็นข้อมูลจริง) เครื่องที่เพิ่ง clone มาจึงไม่มี
+        # ไม่มีก็เปิดระบบได้ — ข่าวยังดึงได้ตามปกติ แค่ยังไม่มีใครให้จับคู่
+        # ผู้ใช้อัปโหลดผ่านหน้าเว็บทีหลังได้ ซึ่งมีตัวตรวจไฟล์ให้ด้วย ดีกว่าวางไฟล์เอง
+        $hasPortfolio = @(Get-ChildItem (Join-Path $root 'data') -Filter *.xlsx -ErrorAction SilentlyContinue |
+                          Where-Object { $_.Name -match 'portfolio|port' }).Count -gt 0
+        $hasTxn = @(Get-ChildItem (Join-Path $root 'data') -Filter *.xlsx -ErrorAction SilentlyContinue |
+                    Where-Object { $_.Name -match 't_match|txn|transaction' }).Count -gt 0
+
+        if ($hasPortfolio -and $hasTxn) {
+            Step 'นำเข้าไฟล์ลูกค้า + คำนวณ feature และ persona (STEP1/STEP5)'
+            python -m scripts.pipeline ingest
+            if (-not $?) { throw 'ingest failed' }
+        }
+        else {
+            Write-Host ''
+            Write-Host '  ! ยังไม่มีไฟล์ลูกค้าในโฟลเดอร์ data — ข้ามขั้นตอนนำเข้าไปก่อน' -ForegroundColor Yellow
+            Write-Host '    ระบบจะเปิดได้ตามปกติ มีข่าวครบ แต่ยังไม่มีรายชื่อลูกค้าให้จับคู่' -ForegroundColor DarkGray
+            Write-Host '    วิธีใส่ข้อมูล: เปิดเว็บแล้วไปเมนู "นำเข้าไฟล์" อัปโหลดสองไฟล์ได้เลย' -ForegroundColor White
+            Write-Host '    (ไฟล์ลูกค้าไม่ได้อยู่ใน git เพราะเป็นข้อมูลจริง ต้องขอจากผู้ดูแล)' -ForegroundColor DarkGray
+            Write-Host ''
+        }
 
         Step "ดึงข่าวจาก Cafe Invest API ($($NewsPages * 100) ชิ้นล่าสุด)"
         python -m scripts.pipeline news --pages $NewsPages
         if (-not $?) { throw 'news failed' }
 
-        Step 'จับคู่ข่าวกับลูกค้า (STEP6)'
-        python -m scripts.pipeline match
-        if (-not $?) { throw 'match failed' }
+        if ($hasPortfolio -and $hasTxn) {
+            Step 'จับคู่ข่าวกับลูกค้า (STEP6)'
+            python -m scripts.pipeline match
+            if (-not $?) { throw 'match failed' }
+        }
     }
 
     $dist = Join-Path $frontend 'dist'

@@ -52,12 +52,23 @@ TXN_COLS = {
 }
 
 
+class CustomerFilesMissing(FileNotFoundError):
+    """ยังไม่มีไฟล์ลูกค้าในเครื่อง — ต่างจากไฟล์เสีย ตัวเรียกจึงข้ามขั้นนี้ไปได้"""
+
+
 def _find(patterns: list[str]) -> Path:
-    for p in sorted(DATA_DIR.glob("*.xlsx")):
-        low = p.name.lower()
-        if any(pat in low for pat in patterns):
-            return p
-    raise FileNotFoundError(f"ไม่พบไฟล์ที่ตรงกับ {patterns} ใน {DATA_DIR}")
+    if DATA_DIR.exists():
+        for p in sorted(DATA_DIR.glob("*.xlsx")):
+            low = p.name.lower()
+            if any(pat in low for pat in patterns):
+                return p
+    # ไฟล์ลูกค้าไม่ได้อยู่ใน git (เป็นข้อมูลจริง) เครื่องที่เพิ่ง clone มาจึงไม่มีแน่นอน
+    # ข้อความต้องบอกทางออกให้ครบ ไม่ใช่แค่บอกว่าหาไม่เจอแล้วปล่อยให้ไปเดาเอง
+    raise CustomerFilesMissing(
+        f"ไม่พบไฟล์ลูกค้าที่ชื่อมีคำว่า {' หรือ '.join(patterns)} ใน {DATA_DIR}\n"
+        f"  ไฟล์ลูกค้าไม่ได้อยู่ใน git เพราะเป็นข้อมูลจริง — เลือกทางใดทางหนึ่ง:\n"
+        f"    1. เปิดระบบแล้วอัปโหลดผ่านหน้า 'นำเข้าไฟล์' (แนะนำ — มีตัวตรวจไฟล์ให้ด้วย)\n"
+        f"    2. วางไฟล์ .xlsx ไว้ใน {DATA_DIR} แล้วรัน  python -m scripts.pipeline ingest")
 
 
 # คู่มือ mask สั่งให้ตั้งชื่อคอลัมน์ RM ว่า rm_id แต่ไฟล์จากทีม Data ใช้ m_id
